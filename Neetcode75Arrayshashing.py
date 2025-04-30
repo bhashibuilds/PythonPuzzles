@@ -73,3 +73,32 @@ print("Decoded:", decoded)  # Output: ["neet", "code", "love", "you"]
 def hasDuplicate(self, nums):
     return len(set(nums)) < len(nums) # if the length of the hashset is less than array it has duplicates so it is true 
 
+# Valid Anagram
+# Given two strings s and t return true if the two strings are anagrams of eachother
+# What is an anagram? An anagram is when a word has the same amount of letters and 
+# the same letters as another word like cat and tac 
+
+# how can we find if they are anagrams?
+
+# we are inputting s and t strings (words which are given to us and the output is a boolean value 
+
+# first we would check if they have the same length even 
+# then if they have the same length we can create a hashmap that contains each word and how many 
+# times that word occurs 
+
+def isAnagram(self, s: str, t: str) -> bool: 
+    if len(s) != len(t): # if the length of s and t are not same then they are not anagrams
+        return False # since they are not anagrams we return false 
+
+    countS, countT = {}, {} # we are creating two hashmaps count s and count t
+
+    for i in range(len(s)): # since we determined that the length of s and t is the same 
+        # we are going from 0 to end of the lengths of s 
+        countS[s[i]] = 1 + countS.get(s[i], 0)
+        # in the hashmap count s and count t we are inputting every letter in strings s and t
+        countT[t[i]] = 1 + countT.get(t[i], 0)
+        # and 1 + hashmap.get(letter,0) to increment 1 on a particular letter in the hashmap after adding it
+    return countS == countT
+    # so far we have two different hashmaps and they are storing the letters and count of letters
+    # to see if they are anagrams we must check if they have the same letters and same count
+    # so we just check if they are equal to each other 
