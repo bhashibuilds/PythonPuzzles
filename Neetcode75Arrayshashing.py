@@ -123,4 +123,27 @@ def twoSum(self, nums: List[int], target: int) -> List[int]: # two sum function 
         # [prevMap[diff], i] gives us the index key value for a hashmap and i is the regular index we find as we for loop 
         prevMap[n] = i  # if the index of the difference doesnt exist in prev map, or in other words if the difference 
         # doesnt exist at all then we do prevMap[n] = i, we are adding that value n and setting it to i key in the prevMap hashmap
+
+# Group Anagrams 
+# Input is array of strings strs
+# group all the anagrams together into sublists 
+# An anagram is a string that contains the same characters as another string
+# But the order of the characters can be different
+# example is cat / tac
+
+from typing import List
+
+def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    res = {}  # using a dictionary 
+    for s in strs: # going through all the words in the input string 
+        count = [0] * 26 # creating one list with 26 different '0' elements
+        for c in s: # for every letter in each word 
+            count[ord(c) - ord('a')] += 1 # increasing the count for that letter 
+        key = tuple(count) # making it into a tuple so that we can add it to the dictionary as a key
+        if key not in res: # if that key is not in the dict
+            res[key] = []  # manually initialize list if key is not present
+        res[key].append(s) # the key is the jumble of list of letters and we are matching to it
+        # the value, which is the word itself s 
+    return list(res.values()) # res.values returns the values from the dictionary which is the words
+
         
