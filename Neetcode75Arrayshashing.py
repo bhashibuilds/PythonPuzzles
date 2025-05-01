@@ -102,3 +102,25 @@ def isAnagram(self, s: str, t: str) -> bool:
     # so far we have two different hashmaps and they are storing the letters and count of letters
     # to see if they are anagrams we must check if they have the same letters and same count
     # so we just check if they are equal to each other 
+
+    # two sum 
+    # given an array of integers nums and a target integer
+    # return indices i and j where the indices on that array will help you reach the target value
+    # i and j must not be equal 
+    # I would begin to solve this by finding the difference of all the nums in the array from
+    # the target and i would check if the difference could be found in the array 
+    # I need a hash storage to store all the integers in nums and their indices 
+    
+
+def twoSum(self, nums: List[int], target: int) -> List[int]: # two sum function definition 
+    prevMap = {} # we are creating a hashmap to store the indices as well as the values themselves 
+
+    for i, n in enumerate(nums): # we are getting the values and indices in nums at once 
+        diff = target - n # the difference is given from each value from the list and the target value 
+        # btw we are currently iterating through nums so every value n is being analyzed by code individually
+        if diff in prevMap: # and if that difference from taregt - n is in the prevmap
+            return [prevMap[diff], i] # we will return [prevMap[diff], i] 
+        # [prevMap[diff], i] gives us the index key value for a hashmap and i is the regular index we find as we for loop 
+        prevMap[n] = i  # if the index of the difference doesnt exist in prev map, or in other words if the difference 
+        # doesnt exist at all then we do prevMap[n] = i, we are adding that value n and setting it to i key in the prevMap hashmap
+        
