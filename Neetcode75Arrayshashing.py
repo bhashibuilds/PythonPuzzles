@@ -158,8 +158,7 @@ def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 # The advantage to using this is that the array will have a limit no matter how much gap there is between 
 # numbers, since it is based on the frequency of the given array, the bucket sort array can't exceed the sum(frequency)
 
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = {} 
         freq = [[] for i in range(len(nums) + 1)] # we are creating sublists within list freq, by the length of the nums list
         # we add one because when looking for frequency 0 is irrelevant so 1 is needed 
@@ -176,3 +175,17 @@ class Solution:
                 res.append(num)
                 if len(res) == k:
                     return res
+                
+# products of array except self 
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+        res = [1] * (len(nums))
+
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
