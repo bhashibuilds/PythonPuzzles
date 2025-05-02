@@ -146,4 +146,33 @@ def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         # the value, which is the word itself s 
     return list(res.values()) # res.values returns the values from the dictionary which is the words
 
+
+# top k frequent elements 
+# Inputs are an int array nums and an integer k
+# the frequency of the elements in the list varies and this number is represented by k 
+
+# Bucket sort algorithm involves using the index as the count, while the 
+# associated values to that index are the numbers themselves 
+# for example indices 1 | 2 | 3 can have associated values 3 | 4,6 | 5
+# meaning 5 appeared 3 times, 4 and 6 appeared 2 times and 3 appeared only once
+# The advantage to using this is that the array will have a limit no matter how much gap there is between 
+# numbers, since it is based on the frequency of the given array, the bucket sort array can't exceed the sum(frequency)
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = {} 
+        freq = [[] for i in range(len(nums) + 1)] # we are creating sublists within list freq, by the length of the nums list
+        # we add one because when looking for frequency 0 is irrelevant so 1 is needed 
+        # Because as discussed before, the counts will only be the length of the frequencys combined and we are creating a sublist for each 
+
+        for num in nums: 
+            count[num] = 1 + count.get(num, 0)
+        for num, cnt in count.items():
+            freq[cnt].append(num)
         
+        res = []
+        for i in range(len(freq) - 1, 0, -1):
+            for num in freq[i]:
+                res.append(num)
+                if len(res) == k:
+                    return res
